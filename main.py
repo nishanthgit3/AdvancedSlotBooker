@@ -1,3 +1,4 @@
+import json
 import requests
 from tkinter import *
 
@@ -9,19 +10,20 @@ root.iconphoto(True, icon)
 root.geometry("925x800")
 
 # Functions
-# GUI
-def cookieButtonClick():
-    cookie = cookieEntry.get()
-    headers = {'Host':'ps.bitsathy.ac.in', 'Cookie': 'PS='+cookie}
 
 # Logics
 def getCourse():
     url = 'https://ps.bitsathy.ac.in/api/ps_v2/my-course?tab=personalizedSkills'
     try:
         r = requests.get(url, headers=headers)
+        data = r.json()
     except:
         print("Please enter a cookie before requesting for the courses")
 
+# GUI
+def cookieButtonClick():
+    cookie = cookieEntry.get()
+    headers = {'Host':'ps.bitsathy.ac.in', 'Cookie': 'PS='+cookie}
 
 # Creating
 # Row 1
@@ -30,7 +32,7 @@ cookieEntry = Entry(root, width=50)
 cookieButton = Button(root, text="✓", command=cookieButtonClick)
 
 # Row 2
-coursesMenu = OptionMenu(root, course, "")
+# coursesMenu = OptionMenu(root, course, "")
 
 # Showing/Grids
 cookieText.grid(row=0, column=0)
