@@ -16,7 +16,7 @@ python3 main.py
 ```
 ### Windows
 [Download](https://github.com/nishanthgit3/AdvancedSlotBooker/releases/download/v1/AdvancedSlotBooker)
-> Windows executable not supported, but provided. Ideally run the script directly with dependencies
+> Warning: Windows executable not supported, but provided. Ideally run the script directly with dependencies
 
 ## Run
 ### Linux
