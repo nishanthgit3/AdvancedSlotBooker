@@ -1,5 +1,5 @@
 # Advanced Slot Booker
-An automatic slot booker written in python, with a GUI.  
+An automatic PS slot booker written in python, with a GUI  
 
 ## Preview
 ![Advanced Slot Booker Screenshot](screenshots/ASB.png)
@@ -21,3 +21,5 @@ python3 main.py
 source .venv/bin/activate
 python3 main.py
 ```
+
+> Note: No AI was used in the development of this project
