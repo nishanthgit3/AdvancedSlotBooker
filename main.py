@@ -7,9 +7,7 @@ from tkinter import *
 # Root window
 root  = Tk()
 root.title("Advanced Slot Booker")
-icon = PhotoImage(file="logo.png")
-root.iconphoto(True, icon)
-root.geometry("925x400")
+root.geometry("925x300")
 
 # Functions
 # Logics
