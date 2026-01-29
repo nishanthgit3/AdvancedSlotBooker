@@ -12,6 +12,7 @@ root.geometry("925x400")
 # Functions
 # Logics
 allCourses = ["No courses available"]
+noCookieError = "Please enter a cookie before requesting for the courses"
 def getCourse():
     url = 'https://ps.bitsathy.ac.in/api/ps_v2/my-course?tab=personalizedSkills'
     try:
@@ -24,7 +25,7 @@ def getCourse():
             allCourses.append(i["name"])
         showCourseMenu()
     except:
-        print("Please enter a cookie before requesting for the courses")
+        print(noCookieError)
 
 def getRegisterId():
     courseText = course.get()
@@ -32,6 +33,26 @@ def getRegisterId():
         if i["name"] == courseText:
             global registerId
             registerId = i["id"]
+
+def getCourseId():
+    url = 'https://ps.bitsathy.ac.in/api/ps_v2/my-course/details?id=' + str(registerId) + '&courseMaterial=1'
+    try:
+        r = requests.get(url, headers=headers)
+        rJson = r.json()
+        global courseId
+        courseId = rJson["course_id"]
+    except:
+        print(noCookieError)
+
+def getSlotId():
+    url = 'https://ps.bitsathy.ac.in/api/ps_v2/slots/available?id=775' + str(courseId)
+    try:
+        r = requests.get(url, headers=headers)
+        rJson = r.json()
+        global courseId
+        courseId = rJson["course_id"]
+    except:
+        print(noCookieError)
 
 # GUI
 def cookieButtonClick():
@@ -42,6 +63,7 @@ def cookieButtonClick():
 
 def startButtonClick():
     getRegisterId()
+    getCourseId()
 
 def showCourseMenu():
     global course
