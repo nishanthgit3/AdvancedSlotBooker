@@ -1,6 +1,5 @@
 import json
 import requests
-import sys
 import threading
 import time
 from tkinter import *
