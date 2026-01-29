@@ -1,5 +1,7 @@
 import json
 import requests
+import sys
+import time
 from tkinter import *
 
 # Root window
@@ -25,7 +27,7 @@ def getCourse():
             allCourses.append(i["name"])
         showCourseMenu()
     except:
-        print(noCookieError)
+        print("getCourse: " + noCookieError)
 
 def getRegisterId():
     courseText = course.get()
@@ -42,7 +44,7 @@ def getCourseId():
         global courseId
         courseId = rJson["course_id"]
     except:
-        print(noCookieError)
+        print("getCourseId: " + noCookieError)
 
 def getSlotId():
     url = 'https://ps.bitsathy.ac.in/api/ps_v2/slots/available?id=' + str(courseId)
@@ -54,24 +56,27 @@ def getSlotId():
         else:
             l = len(rJson)
             chosenSlot = 0
-            if l < int(slotNo):
-                chosenSlot = l - 1
+            if l < int(slotNo.get()):
+                chosenSlot = l - 1 
             else:
-                chosenSlot = int(slotNo) - 1
+                chosenSlot = int(slotNo.get()) - 1
             global slotId
             chosenJson = rJson[chosenSlot]
             slotId = chosenJson["id"]
             print(chosenJson["label"])
     except:
-        print(noCookieError)
+        print("getSlotId: " + noCookieError)
 
 def bookSlot():
-    url = 'idk rn'
-    payload = {'slot_id':slotId, 'register_id':registerId}
+    url = 'https://ps.bitsathy.ac.in/api/ps_v2/slots/register'
+    payload = {}
+    payload['slot_id'] = int(slotId)
+    payload['register_id'] = int(registerId)
     r = requests.put(url, headers=headers, data=payload)
 
 # GUI
 def cookieButtonClick():
+    cookieButton['state'] = DISABLED
     cookie = cookieEntry.get()
     global headers 
     headers = {'Host':'ps.bitsathy.ac.in', 'Cookie': 'PS='+cookie}
@@ -81,6 +86,13 @@ def startButtonClick():
     getRegisterId()
     getCourseId()
     getSlotId()
+    # Timer
+    while 1:  
+        t = time.localtime()
+        currentTime = time.strftime("%H:%M:%S", t)
+        if currentTime == "20:00:01":
+            bookSlot()
+            break
 
 def showCourseMenu():
     global course
@@ -88,13 +100,14 @@ def showCourseMenu():
     course.set("Select a course")
     coursesMenu = OptionMenu(root, course, *allCourses)
     coursesMenu.grid(row=1, column=1)
+    startButton['state'] = NORMAL
 
 # Creating
 # Row 0 Cookie
 cookieText = Label(root, text="Cookie")
 cookieEntry = Entry(root, width=50)
-cookieButton = Button(root, text="✓", command=cookieButtonClick)
-startButton = Button(root, text="Start", command=startButtonClick)
+cookieButton = Button(root, text="✓", command=cookieButtonClick, state=NORMAL)
+startButton = Button(root, text="Start", command=startButtonClick, state=DISABLED)
 
 # Row 2 SlotNo
 slotNo = StringVar()
