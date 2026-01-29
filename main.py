@@ -65,6 +65,11 @@ def getSlotId():
     except:
         print(noCookieError)
 
+def bookSlot():
+    url = 'idk rn'
+    payload = {'slot_id':slotId, 'register_id':registerId}
+    r = requests.put(url, data=payload)
+
 # GUI
 def cookieButtonClick():
     cookie = cookieEntry.get()
