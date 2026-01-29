@@ -1,11 +1,15 @@
 from tkinter import *
 
+# Root window
 root  = Tk()
+root.title("Advanced Slot Booker")
+icon = PhotoImage(file="logo.png")
+root.iconphoto(True, icon)
+root.geometry("925x800")
 
 # Functions
 def cookieButtonClick():
     cookie = cookieEntry.get()
-    print(cookie)
 
 # Creating
 # Row 1
