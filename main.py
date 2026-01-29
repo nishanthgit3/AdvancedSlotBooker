@@ -7,7 +7,7 @@ root  = Tk()
 root.title("Advanced Slot Booker")
 icon = PhotoImage(file="logo.png")
 root.iconphoto(True, icon)
-root.geometry("925x800")
+root.geometry("925x400")
 
 # Functions
 # Logics
@@ -16,6 +16,7 @@ def getCourse():
     url = 'https://ps.bitsathy.ac.in/api/ps_v2/my-course?tab=personalizedSkills'
     try:
         r = requests.get(url, headers=headers)
+        global data
         data = r.json()
         global allCourses
         allCourses = []
@@ -26,8 +27,9 @@ def getCourse():
         print("Please enter a cookie before requesting for the courses")
 
 def getRegisterId():
+    courseText = course.get()
     for i in data:
-        if i["name"] == course:
+        if i["name"] == courseText:
             global registerId
             registerId = i["id"]
 
@@ -37,6 +39,9 @@ def cookieButtonClick():
     global headers 
     headers = {'Host':'ps.bitsathy.ac.in', 'Cookie': 'PS='+cookie}
     getCourse()
+
+def startButtonClick():
+    getRegisterId()
 
 def showCourseMenu():
     global course
@@ -50,11 +55,12 @@ def showCourseMenu():
 cookieText = Label(root, text="Cookie")
 cookieEntry = Entry(root, width=50)
 cookieButton = Button(root, text="✓", command=cookieButtonClick)
-
+startButton = Button(root, text="Start", command=startButtonClick)
 
 # Showing/Grids
 cookieText.grid(row=0, column=0)
 cookieEntry.grid(row=0, column=1)
 cookieButton.grid(row=0, column=2)
+startButton.grid(row=2, column=1)
 
 root.mainloop()
