@@ -68,7 +68,7 @@ def getSlotId():
 def bookSlot():
     url = 'idk rn'
     payload = {'slot_id':slotId, 'register_id':registerId}
-    r = requests.put(url, headers=headers, data=payload)
+    r = requests.put(url, data=payload)
 
 # GUI
 def cookieButtonClick():
@@ -87,30 +87,25 @@ def showCourseMenu():
     course = StringVar()
     course.set("Select a course")
     coursesMenu = OptionMenu(root, course, *allCourses)
-    coursesMenu.grid(row=2, column=1)
+    coursesMenu.grid(row=1, column=1)
 
 # Creating
-# Row 0 Image
-logo = PhotoImage(file="logo.gif")
-logo = Label(root, image=logo)
-
-# Row 1 Cookie
+# Row 0
 cookieText = Label(root, text="Cookie")
 cookieEntry = Entry(root, width=50)
 cookieButton = Button(root, text="✓", command=cookieButtonClick)
 startButton = Button(root, text="Start", command=startButtonClick)
 
-# Row 3 SlotNo
+# Row 2
 slotNo = StringVar()
 slotNo.set("Select a slot number")
 slotNoMenu = OptionMenu(root, slotNo, "1", "2", "3", "4", "5")
 
 # Showing/Grids
-cookieText.grid(row=1, column=0)
-cookieEntry.grid(row=1, column=1)
-cookieButton.grid(row=1, column=2)
-slotNoMenu.grid(row=3, column=1)
-startButton.grid(row=4, column=1)
-logo.grid(row=0, column=1)
+cookieText.grid(row=0, column=0)
+cookieEntry.grid(row=0, column=1)
+cookieButton.grid(row=0, column=2)
+slotNoMenu.grid(row=2, column=1)
+startButton.grid(row=3, column=1)
 
 root.mainloop()
