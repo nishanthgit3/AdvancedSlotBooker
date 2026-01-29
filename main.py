@@ -1,6 +1,7 @@
 import json
 import requests
 import sys
+import threading
 import time
 from tkinter import *
 
@@ -92,6 +93,11 @@ def startButtonClick():
             bookSlot()
             break
 
+def threadStartButton():
+    thread = threading.Thread(target=startButtonClick)
+    thread.daemon = True
+    thread.start()
+
 def showCourseMenu():
     global course
     course = StringVar()
@@ -105,7 +111,7 @@ def showCourseMenu():
 cookieText = Label(root, text="Cookie")
 cookieEntry = Entry(root, width=50)
 cookieButton = Button(root, text="✓", command=cookieButtonClick, state=NORMAL)
-startButton = Button(root, text="Start", command=startButtonClick, state=DISABLED)
+startButton = Button(root, text="Start", command=threadStartButton, state=DISABLED)
 
 # Row 2 SlotNo
 slotNo = StringVar()
