@@ -68,7 +68,7 @@ def getSlotId():
 def bookSlot():
     url = 'idk rn'
     payload = {'slot_id':slotId, 'register_id':registerId}
-    r = requests.put(url, data=payload)
+    r = requests.put(url, headers=headers, data=payload)
 
 # GUI
 def cookieButtonClick():
@@ -90,13 +90,13 @@ def showCourseMenu():
     coursesMenu.grid(row=1, column=1)
 
 # Creating
-# Row 0
+# Row 0 Cookie
 cookieText = Label(root, text="Cookie")
 cookieEntry = Entry(root, width=50)
 cookieButton = Button(root, text="✓", command=cookieButtonClick)
 startButton = Button(root, text="Start", command=startButtonClick)
 
-# Row 2
+# Row 2 SlotNo
 slotNo = StringVar()
 slotNo.set("Select a slot number")
 slotNoMenu = OptionMenu(root, slotNo, "1", "2", "3", "4", "5")
