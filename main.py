@@ -71,7 +71,11 @@ def bookSlot():
     payload = {}
     payload['slot_id'] = int(slotId)
     payload['register_id'] = int(registerId)
-    r = requests.put(url, headers=headers, data=payload)
+    print(payload)
+    jsonPayload = json.dumps(payload)
+    r = requests.put(url, headers=headers, data=jsonPayload)
+    rJson = r.json()
+    print(rJson)
 
 # GUI
 def cookieButtonClick():
@@ -84,12 +88,12 @@ def cookieButtonClick():
 def startButtonClick():
     getRegisterId()
     getCourseId()
-    getSlotId()
     # Timer
     while 1:  
         t = time.localtime()
         currentTime = time.strftime("%H:%M:%S", t)
         if currentTime == "20:00:01":
+            getSlotId()
             bookSlot()
             break
 
