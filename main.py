@@ -10,7 +10,6 @@ root.iconphoto(True, icon)
 root.geometry("925x800")
 
 # Functions
-
 # Logics
 allCourses = ["No courses available"]
 def getCourse():
@@ -26,6 +25,12 @@ def getCourse():
     except:
         print("Please enter a cookie before requesting for the courses")
 
+def getRegisterId():
+    for i in data:
+        if i["name"] == course:
+            global registerId
+            registerId = i["id"]
+
 # GUI
 def cookieButtonClick():
     cookie = cookieEntry.get()
@@ -34,6 +39,7 @@ def cookieButtonClick():
     getCourse()
 
 def showCourseMenu():
+    global course
     course = StringVar()
     course.set("Select a course")
     coursesMenu = OptionMenu(root, course, *allCourses)
@@ -45,31 +51,10 @@ cookieText = Label(root, text="Cookie")
 cookieEntry = Entry(root, width=50)
 cookieButton = Button(root, text="✓", command=cookieButtonClick)
 
-# Row 2
-# course = StringVar()
-# course.set("Select a course")
-# coursesMenu = OptionMenu(root, course, *allCourses)
 
 # Showing/Grids
 cookieText.grid(row=0, column=0)
 cookieEntry.grid(row=0, column=1)
 cookieButton.grid(row=0, column=2)
-# coursesMenu.grid(row=1, column=1)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 root.mainloop()
