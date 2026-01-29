@@ -14,6 +14,8 @@ source .venv/bin/activate
 pip install -r requirements.txt
 python3 main.py
 ```
+### Windows
+[Download](https://github.com/nishanthgit3/AdvancedSlotBooker/releases/download/v1/AdvancedSlotBooker)
 
 ## Run
 ### Linux
