@@ -85,6 +85,7 @@ def cookieButtonClick():
     getCourse()
 
 def startButtonClick():
+    startButton['state'] = DISABLED
     getRegisterId()
     getCourseId()
     # Timer
