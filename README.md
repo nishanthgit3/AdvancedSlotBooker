@@ -14,6 +14,7 @@ source .venv/bin/activate
 pip install -r requirements.txt
 python3 main.py
 ```
+> Dependencies: Install tkinter package for your respective distro, before running the commands
 ### Windows
 [Download](https://github.com/nishanthgit3/AdvancedSlotBooker/releases/download/v1/AdvancedSlotBooker)
 > Warning: Windows executable not supported, but provided. Ideally run the script directly with dependencies

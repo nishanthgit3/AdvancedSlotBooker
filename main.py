@@ -7,7 +7,7 @@ from tkinter import *
 # Root window
 root  = Tk()
 root.title("Advanced Slot Booker")
-root.geometry("925x300")
+root.geometry("495x150")
 
 # Functions
 # Logics
